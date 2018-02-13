@@ -1,12 +1,12 @@
 import java.util.Date;
 
 public class Sportif { 
-  String nom;
-  String prenom;
-  String pseudo;
-  String motDePasse;
-  Date naissance;
-  Sport sport;
+  private String nom;
+  private String prenom;
+  private String pseudo;
+  private String motDePasse;
+  private Date naissance;
+  private Sport sport;
 
   /**
    * Constructeur sans paramétres de la classe sportif.
@@ -19,7 +19,6 @@ public class Sportif {
     this.pseudo = null;
     this.naissance = new Date(0);
     this.sport = null;
-    
   }
   
   /**
@@ -33,11 +32,15 @@ public class Sportif {
    */
   public Sportif(String nom, String prenom, String pseudo, Date date, Sport sport) {
     super();
+    
+    nom = nom.toUpperCase();
+    prenom = prenom.substring(0, 1).toUpperCase() + prenom.substring(1).toLowerCase();
+    
     this.nom = nom;
     this.prenom = prenom;
     this.pseudo = pseudo;
     this.naissance = date;
-    this.sport = sport ;
+    this.sport = sport;
     this.motDePasse = "";
   }
 
@@ -46,6 +49,7 @@ public class Sportif {
   }
   
   public void setNom(String nom) {
+    nom = nom.toUpperCase();
     this.nom = nom;
   }
   
@@ -54,6 +58,7 @@ public class Sportif {
   }
   
   public void setPrenom(String prenom) {
+    prenom = prenom.substring(0, 1).toUpperCase() + prenom.substring(1).toLowerCase();
     this.prenom = prenom;
   }
 
@@ -87,58 +92,81 @@ public class Sportif {
         + "naissance=" + naissance + ", sport=" + sport + "]";
   }
 
-@Override
+  @Override
 public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
-	result = prime * result + ((naissance == null) ? 0 : naissance.hashCode());
-	result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-	result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-	result = prime * result + ((pseudo == null) ? 0 : pseudo.hashCode());
-	result = prime * result + ((sport == null) ? 0 : sport.hashCode());
-	return result;
-}
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
+    result = prime * result + ((naissance == null) ? 0 : naissance.hashCode());
+    result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+    result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+    result = prime * result + ((pseudo == null) ? 0 : pseudo.hashCode());
+    result = prime * result + ((sport == null) ? 0 : sport.hashCode());
+    return result;
+  }
 
-@Override
+  @Override
 public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Sportif other = (Sportif) obj;
-	if (motDePasse == null) {
-		if (other.motDePasse != null)
-			return false;
-	} else if (!motDePasse.equals(other.motDePasse))
-		return false;
-	if (naissance == null) {
-		if (other.naissance != null)
-			return false;
-	} else if (!naissance.equals(other.naissance))
-		return false;
-	if (nom == null) {
-		if (other.nom != null)
-			return false;
-	} else if (!nom.equals(other.nom))
-		return false;
-	if (prenom == null) {
-		if (other.prenom != null)
-			return false;
-	} else if (!prenom.equals(other.prenom))
-		return false;
-	if (pseudo == null) {
-		if (other.pseudo != null)
-			return false;
-	} else if (!pseudo.equals(other.pseudo))
-		return false;
-	if (sport != other.sport)
-		return false;
-	return true;
-}
-  
-  
-  
+    
+    if (this == obj) {
+      return true;
+    }
+    
+    if (obj == null) {
+      return false;
+    }
+    
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    
+    Sportif other = (Sportif) obj;
+    if (motDePasse == null) {
+      if (other.motDePasse != null) {
+        return false;
+      }
+    } else if (!motDePasse.equals(other.motDePasse)) {
+      return false;
+    }
+      
+    if (naissance == null) {
+      if (other.naissance != null) {
+        return false;
+      }
+    } else if (!naissance.equals(other.naissance)) {
+      return false;
+    }
+ 
+      
+    if (nom == null) {
+      if (other.nom != null) {
+        return false;
+      }
+    } else if (!nom.equals(other.nom)) {
+      return false;
+    }  
+     
+    if (prenom == null) {
+      if (other.prenom != null) {
+        return false;
+      }
+    } else if (!prenom.equals(other.prenom)) {
+      return false;
+    }
+    
+         
+    if (pseudo == null) {
+      if (other.pseudo != null) {
+        return false;
+      }
+    } else if (!pseudo.equals(other.pseudo)) {
+      return false;
+    }
+         
+    if (sport != other.sport) {
+      return false;
+    }
+    
+    return true;
+  }
 }
