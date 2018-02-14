@@ -1,18 +1,18 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Sportif { 
   private String nom;
   private String prenom;
   private String pseudo;
-  private String motDePasse;
   private Date naissance;
   private Sport sport;
 
   /**
-   * Constructeur sans paramétres de la classe sportif.
+   * Constructor no parameters class Sportif.
    */
   public Sportif() {
-    // TODO Auto-generated constructor stub
     super();
     this.nom = null;
     this.prenom = null;
@@ -22,7 +22,7 @@ public class Sportif {
   }
   
   /**
-   * Constructeur avec paramètres le sportif.
+   * Constructor with parameters class Sportif.
    * 
    * @param nom nom du sportif
    * @param prenom prénom du sportif
@@ -33,15 +33,11 @@ public class Sportif {
   public Sportif(String nom, String prenom, String pseudo, Date date, Sport sport) {
     super();
     
-    nom = nom.toUpperCase();
-    prenom = prenom.substring(0, 1).toUpperCase() + prenom.substring(1).toLowerCase();
-    
-    this.nom = nom;
-    this.prenom = prenom;
-    this.pseudo = pseudo;
-    this.naissance = date;
-    this.sport = sport;
-    this.motDePasse = "";
+    this.setNom(nom);
+    this.setPrenom(prenom);
+    this.setPseudo(pseudo);
+    this.setNaissance(date);
+    this.setSport(sport);
   }
 
   public String getNom() {
@@ -74,8 +70,38 @@ public class Sportif {
     return naissance;
   }
 
+  /**
+   * Fonction de la classe sportifs permettent de modifier la date de naissance du sportif.
+   * @param naissance la nouvelle date de naissance du sportif
+   */
+  @SuppressWarnings("deprecation")
   public void setNaissance(Date naissance) {
-    this.naissance = naissance;
+    
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    Date date = new Date();
+    System.out.println(dateFormat.format(date));
+    
+    if (naissance.getYear() < date.getYear()) {
+      
+      this.naissance = naissance;
+      
+    } else if (naissance.getYear() == date.getYear()) {
+      
+      if (naissance.getMonth() < date.getMonth()) {
+        
+        this.naissance = naissance;
+        
+      } else if (naissance.getMonth() == date.getMonth()) {
+        if (naissance.getDay() < date.getDay()) {
+          
+          this.naissance = naissance;
+          
+        } else if (naissance.getDay() == date.getDay()) {
+          this.naissance = naissance;
+        }
+      }
+      
+    }
   }
 
   public Sport getSport() {
@@ -96,7 +122,6 @@ public class Sportif {
 public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
     result = prime * result + ((naissance == null) ? 0 : naissance.hashCode());
     result = prime * result + ((nom == null) ? 0 : nom.hashCode());
     result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
@@ -121,13 +146,6 @@ public boolean equals(Object obj) {
     }
     
     Sportif other = (Sportif) obj;
-    if (motDePasse == null) {
-      if (other.motDePasse != null) {
-        return false;
-      }
-    } else if (!motDePasse.equals(other.motDePasse)) {
-      return false;
-    }
       
     if (naissance == null) {
       if (other.naissance != null) {
