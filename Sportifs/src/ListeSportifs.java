@@ -1,5 +1,3 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -35,7 +33,7 @@ public class ListeSportifs {
    * @param sport Le sport du sportif
    * @return
    */
-  @SuppressWarnings("deprecation")
+  
   int creerSportif(String nom, String prenom, String pseudo, Date date, Sport sport) {
     int result = 0;
     Sportif sportif;
@@ -53,15 +51,11 @@ public class ListeSportifs {
     }
     
     if (result == 0) {
-      SimpleDateFormat dateN = new SimpleDateFormat("dd/MM/yyyy");
-      @SuppressWarnings("unused")
-      Date d = null;
-      sportif = new Sportif(nom,prenom,pseudo,date,sport);
-      listeDeSportifs.add(sportif);
-      try {
-        d = dateN.parse(date.getDay() + "/" + date.getMonth() + "/" + date.getYear());
-      } catch (ParseException e) {
-        // TODO Auto-generated catch block
+      
+      sportif = Sportif.creerSportif(nom,prenom,pseudo,date,sport);
+      if (sportif!=null) {
+        listeDeSportifs.add(sportif);
+      } else {
         result = 3;
       }
     }
@@ -78,7 +72,7 @@ public class ListeSportifs {
    * @param sport   le nouveau sport du sportif
    * @return
    */
-  int modifierSportif(String nom, String prenom, String pseudo, Sport sport) {
+  int modifierSportif(String nom, String prenom, String pseudo, Date date, Sport sport) {
     int result = 0;
     Sportif sportif1 = null;
     
@@ -101,6 +95,10 @@ public class ListeSportifs {
       
       if (sport != null) {
         sportif1.setSport(sport);
+      }
+      
+      if (date != null) {
+        sportif1.setNaissance(date);
       }
       
     }

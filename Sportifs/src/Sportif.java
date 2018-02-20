@@ -1,5 +1,3 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Sportif { 
@@ -9,53 +7,90 @@ public class Sportif {
   private Date naissance;
   private Sport sport;
 
-  /**
-   * Constructor no parameters class Sportif.
-   */
+  
   public Sportif() {
     super();
     this.nom = null;
     this.prenom = null;
     this.pseudo = null;
-    this.naissance = new Date(0);
-    this.sport = null;
+    this.naissance = null;
   }
-  
+
   /**
-   * Constructor with parameters class Sportif.
+   * Constructeur de la classe Sportif. Elle fait appel aux fonctions seteurs de la classe.
    * 
    * @param nom nom du sportif
-   * @param prenom pr�nom du sportif
+   * @param prenom prénom du sportif
    * @param pseudo pseudo du sportif
    * @param date date de naissance du sportif
    * @param sport le sport du sportif
    */
-  public Sportif(String nom, String prenom, String pseudo, Date date, Sport sport) {
-    super();
+  public static Sportif creerSportif(String nom, String prenom, String pseudo, Date date, Sport sport) {
+    Sportif sp = new Sportif();
     
-    this.setNom(nom);
-    this.setPrenom(prenom);
-    this.setPseudo(pseudo);
-    this.setNaissance(date);
-    this.setSport(sport);
+    if (!sp.setNom(nom)) {
+      return null;
+    }
+    
+    if (!sp.setPrenom(prenom)) {
+      return null;
+    }
+    
+    sp.setPseudo(pseudo);
+    
+    if(!sp.setNaissance(date)) {
+      return null;
+    }
+    
+    sp.setSport(sport);
+    
+    return sp;
   }
 
   public String getNom() {
     return nom;
   }
   
-  public void setNom(String nom) {
-    nom = nom.toUpperCase();
-    this.nom = nom;
+  /**
+   *  Fonction permettent de modifier le nom du Sportif en verifiant que le nouveau nom
+   *  est bien un nom.
+   * @param nom le nouveau nom du sportif
+   * @return
+   */
+  public boolean setNom(String nom) {
+    boolean result = false;
+    
+    if (verifierString(nom)) {
+      nom = nom.toUpperCase();
+      this.nom = nom;
+      result = true;
+    } else if (nom.equals(null)) {
+      this.nom = null;
+      result = true;
+    }
+    return result;
   }
   
   public String getPrenom() {
     return prenom;
   }
   
-  public void setPrenom(String prenom) {
-    prenom = prenom.substring(0, 1).toUpperCase() + prenom.substring(1).toLowerCase();
-    this.prenom = prenom;
+  /**
+   * Fonction permettent de modifier le prenom du Sportif.
+   * @param prenom le nouveau prenom du sportif
+   * @return
+   */
+  public boolean setPrenom(String prenom) {
+    boolean result = false;
+    
+    if (verifierString(prenom)) {
+      prenom = prenom.substring(0, 1).toUpperCase() + prenom.substring(1).toLowerCase();
+      this.prenom = prenom;
+      result = true;
+    } else if (prenom.equals(null)) {
+      this.prenom = null;
+    }
+    return result;
   }
 
   public String getPseudo() {
@@ -73,13 +108,12 @@ public class Sportif {
   /**
    * Fonction de la classe sportifs permettent de modifier la date de naissance du sportif.
    * @param naissance la nouvelle date de naissance du sportif
+   * @return 
    */
   @SuppressWarnings("deprecation")
-  public void setNaissance(Date naissance) {
-    
-    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+  public boolean setNaissance(Date naissance) {
+    boolean verifdate = true;
     Date date = new Date();
-    System.out.println(dateFormat.format(date));
     
     if (naissance.getYear() < date.getYear()) {
       
@@ -101,7 +135,10 @@ public class Sportif {
         }
       }
       
+    } else {
+      verifdate = false;
     }
+    return verifdate;
   }
 
   public Sport getSport() {
@@ -119,19 +156,7 @@ public class Sportif {
   }
 
   @Override
-public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((naissance == null) ? 0 : naissance.hashCode());
-    result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-    result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-    result = prime * result + ((pseudo == null) ? 0 : pseudo.hashCode());
-    result = prime * result + ((sport == null) ? 0 : sport.hashCode());
-    return result;
-  }
-
-  @Override
-public boolean equals(Object obj) {
+  public boolean equals(Object obj) {
     
     if (this == obj) {
       return true;
@@ -154,8 +179,7 @@ public boolean equals(Object obj) {
     } else if (!naissance.equals(other.naissance)) {
       return false;
     }
- 
-      
+       
     if (nom == null) {
       if (other.nom != null) {
         return false;
@@ -186,5 +210,23 @@ public boolean equals(Object obj) {
     }
     
     return true;
+  }
+  
+  /**
+   *  Fonction permettent de verifier qu'une chaine de caractère n'est pas composé
+   *  de numerique ou de caractere spéciaux.
+   * @param newString La chaine de caractère à verifier
+   * @return
+   */
+  public boolean verifierString(String newString) {
+    boolean result = true;
+    for (int i = 0; i < newString.length();i++) {
+      char chrNom = newString.charAt(i); //recup le cara
+      if (Character.isLetter(chrNom) == false) { //test caractere
+        result = false;
+      }
+    }
+      
+    return result;
   }
 }
