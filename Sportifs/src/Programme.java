@@ -3,7 +3,7 @@ import java.sql.Date;
 public class Programme {
   
   /**
-   * Programme du logiciel
+   * Test unitaire du module Sportif.
    * 
    * @param args args de la fonction
    */
@@ -13,32 +13,45 @@ public class Programme {
     int creerStatut;
     
     ListeSportifs a = new ListeSportifs();
-    creerStatut = a.creerSportif("Alleno", "clement", "clementalleno", new Date(05,06,1997), Sport.Cyclisme);
-    if(creerStatut == 1) {
-      System.out.println("Le sportif existe dÈj‡ \n");
-    }else if(creerStatut == 2) {
-      System.out.println("L'identifiant est dÈj‡ utilisÈ \n");
-    }else {
-      System.out.println("Le sportif est crÈe \n");
+    Date dt1 = new Date(1997 - 1900, 8, 6);
+    creerStatut = a.creerSportif("Alleno", "clement", "clementalleno", dt1, Sport.Cyclisme);
+    if (creerStatut == 1) {
+      System.out.println("Le sportif existe d√©j√† \n");
+    } else if (creerStatut == 2) {
+      System.out.println("L'identifiant est d√©j√† utilis√© \n");
+    } else {
+      System.out.println("Le sportif est cr√©e \n");
     }
     
-    creerStatut = a.creerSportif("Alleno", "clement", "clementalleno", new Date(05,06,1997), Sport.Cyclisme);
-    if(creerStatut == 1) {
-      System.out.println("Le sportif existe dÈj‡ \n");
-    }else if(creerStatut == 2) {
-      System.out.println("L'identifiant est dÈj‡ utilisÈ \n");
-    }else {
-      System.out.println("Le sportif est crÈe \n");
+    creerStatut = a.creerSportif("Alleno", "clement", "clementalleno", null, Sport.Cyclisme);
+    if (creerStatut == 1) {
+      System.out.println("Le sportif existe d√©j√† \n");
+    } else if (creerStatut == 2) {
+      System.out.println("L'identifiant est d√©j√† utilis√© \n");
+    } else {
+      System.out.println("Le sportif est cr√©e \n");
     }
     
-    creerStatut = a.creerSportif("Alleno", "clement", "a5", new Date(05,06,1997), Sport.Cyclisme);
-    if(creerStatut == 1) {
-      System.out.println("Le sportif existe dÈj‡ \n");
-    }else if(creerStatut == 2) {
-      System.out.println("L'identifiant est dÈj‡ utilisÈ \n");
-    }else {
-      System.out.println("Le sportif est crÈe \n");
+    Date dt2 = new Date(2019 - 1900, 1, 2);
+    creerStatut = a.creerSportif("Alleno", "thomas", "thomasalleno", dt2, Sport.Cyclisme);
+    if (creerStatut == 1) {
+      System.out.println("Le sportif existe d√©j√† \n");
+    } else if (creerStatut == 2) {
+      System.out.println("L'identifiant est d√©j√† utilis√© \n");
+    } else {
+      System.out.println("Le sportif est cr√©e \n");
     }
+    
+    int modifierStatut;
+    
+    modifierStatut = a.modifierSportif("roger", null, "clementalleno", null);
+    if (modifierStatut == 0) {
+      System.out.println("Le sportif n'existe pas \n");
+    } else {
+      System.out.println("Le sportif √† √©t√© modifi√© \n");
+    }
+    
+    System.out.println(a.toString());
   }
 
 }

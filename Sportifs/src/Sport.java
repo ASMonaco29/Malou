@@ -10,7 +10,7 @@ public enum Sport {
   Ju_Jitsu,
   Billard,
   Kite_surf,
-  Pétanque,
+  PÃ©tanque,
   Escrime,
   Football,
   Golf
