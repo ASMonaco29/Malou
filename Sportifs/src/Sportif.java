@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Sportif { 
@@ -6,6 +7,7 @@ public class Sportif {
   private String pseudo;
   private Date naissance;
   private Sport sport;
+  private ArrayList<Questionnaire> listQ;
 
   
   public Sportif() {
@@ -14,6 +16,7 @@ public class Sportif {
     this.prenom = null;
     this.pseudo = null;
     this.naissance = null;
+    this.listQ = new ArrayList<Questionnaire>();
   }
 
   /**
@@ -42,7 +45,8 @@ public class Sportif {
       return null;
     }
     
-    sp.setSport(sport);
+    sp.setSport(sport);    
+    sp.ajouterListQ(new ArrayList<Questionnaire>());
     
     return sp;
   }
@@ -229,4 +233,21 @@ public class Sportif {
       
     return result;
   }
+
+  public ArrayList<Questionnaire> getListQ() {
+    return listQ;
+  }
+
+  public void ajouterListQ(ArrayList<Questionnaire> listQ) {
+    this.listQ = listQ;
+  }
+  
+  public void ajouterQuestionnaire(Questionnaire q) {
+    this.listQ.add(q);
+  }
+  
+  public void supprimerQuestionnaire(Questionnaire q) {
+    this.listQ.remove(q);
+  }
+  
 }
