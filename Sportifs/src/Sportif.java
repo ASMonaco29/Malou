@@ -1,3 +1,6 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +12,9 @@ public class Sportif {
   private Sport sport;
   private ArrayList<Questionnaire> listQ;
 
-  
+  /**
+   * Constructeur de la classe Sportif. Génerer automatiquement.
+   */
   public Sportif() {
     super();
     this.nom = null;
@@ -28,7 +33,8 @@ public class Sportif {
    * @param date date de naissance du sportif
    * @param sport le sport du sportif
    */
-  public static Sportif creerSportif(String nom, String prenom, String pseudo, Date date, Sport sport) {
+  public static Sportif creerSportif(String nom, String prenom, String pseudo, 
+      Date date, Sport sport) {
     Sportif sp = new Sportif();
     
     if (!sp.setNom(nom)) {
@@ -39,11 +45,11 @@ public class Sportif {
       return null;
     }
     
-    if(!sp.setPseudo(pseudo)) {
+    if (!sp.setPseudo(pseudo)) {
       return null;
     }
     
-    if(!sp.setNaissance(date)) {
+    if (!sp.setNaissance(date)) {
       return null;
     }
     
@@ -103,13 +109,18 @@ public class Sportif {
     return pseudo;
   }
   
+  /**
+   * Fonction permettent de modifier le pseudo du Sportif. Avant on vérifie que le pseudo ne comptient pas d'espace.
+   * @param pseudo le nouveau pseudo du sportif 
+   * @return  la fonction retourne false si le pseudo contient un espace, true sinon
+   */
   public boolean setPseudo(String pseudo) {
     boolean result = false;
     
     if (verifierStringPseudo(pseudo)) {
       this.pseudo = pseudo;
       result = true;
-    }else {
+    } else {
       result = false;
     }
     return result;
@@ -124,36 +135,69 @@ public class Sportif {
    * @param naissance la nouvelle date de naissance du sportif
    * @return 
    */
-  @SuppressWarnings("deprecation")
   public boolean setNaissance(Date naissance) {
     boolean verifdate = true;
-    Date date = new Date();
     
-    if (naissance.getYear() < date.getYear()) {
+    Date today;
+    Date todayWithZeroTime;
+    Date naissanceWithZeroTime;
+    DateFormat formatter;
+    String reportDate;
+    String reportNaissance;
+    int jourTdy = 0;
+    int moisTdy = 0;
+    int anTdy = 0;
+    int jourNsc = 0;
+    int moisNsc = 0;
+    int anNsc = 0;
+    
+    
+    formatter = new SimpleDateFormat("dd/MM/yyyy");
+    today = new Date();
+    try {
+      todayWithZeroTime = formatter.parse(formatter.format(today));
+      reportDate = formatter.format(todayWithZeroTime);
+      jourTdy = Integer.parseInt(reportDate.substring(0, 2));
+      moisTdy = Integer.parseInt(reportDate.substring(3, 5));
+      anTdy = Integer.parseInt(reportDate.substring(6, 10));
+      naissanceWithZeroTime = formatter.parse(formatter.format(naissance));
+      reportNaissance = formatter.format(naissanceWithZeroTime);
+      jourNsc = Integer.parseInt(reportNaissance.substring(0, 2));
+      moisNsc = Integer.parseInt(reportNaissance.substring(3, 5));
+      anNsc = Integer.parseInt(reportNaissance.substring(6, 10));
+    
+    } catch (ParseException e2) {
+      e2.printStackTrace();
+    }  
+    
+    
+    
+    
+    if ( anNsc < anTdy ) {
       
       this.naissance = naissance;
       
-    } else if (naissance.getYear() == date.getYear()) {
+    } else if ( anNsc == anTdy ) {
       
-      if (naissance.getMonth() < date.getMonth()) {
+      if ( moisNsc-1 < moisTdy-1) {
         
         this.naissance = naissance;
         
-      } else if (naissance.getMonth() == date.getMonth()) {
-        if (naissance.getDay() < date.getDay()) {
+      } else if ( moisNsc-1 == moisTdy-1)  
+        if ( jourNsc < jourTdy) {
           
           this.naissance = naissance;
           
-        } else if (naissance.getDay() == date.getDay()) {
+        } else if (jourNsc == jourTdy) {
           this.naissance = naissance;
         }
-      }
       
-    } else {
-      verifdate = false;
-    }
-    return verifdate;
-  }
+      
+     } else {
+       verifdate = false;
+     }
+     return verifdate;
+   }
 
   public Sport getSport() {
     return sport;
