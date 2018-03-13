@@ -110,7 +110,8 @@ public class Sportif {
   }
   
   /**
-   * Fonction permettent de modifier le pseudo du Sportif. Avant on vérifie que le pseudo ne comptient pas d'espace.
+   * Fonction permettent de modifier le pseudo du Sportif. Avant on
+   * vérifie que le pseudo ne comptient pas d'espace.
    * @param pseudo le nouveau pseudo du sportif 
    * @return  la fonction retourne false si le pseudo contient un espace, true sinon
    */
@@ -173,18 +174,18 @@ public class Sportif {
     
     
     
-    if ( anNsc < anTdy ) {
+    if (anNsc < anTdy) {
       
       this.naissance = naissance;
       
-    } else if ( anNsc == anTdy ) {
+    } else if (anNsc == anTdy) {
       
-      if ( moisNsc-1 < moisTdy-1) {
+      if (moisNsc - 1 < moisTdy - 1) {
         
         this.naissance = naissance;
         
-      } else if ( moisNsc-1 == moisTdy-1)  
-        if ( jourNsc < jourTdy) {
+      } else if (moisNsc - 1 == moisTdy - 1) {
+        if (jourNsc < jourTdy) {
           
           this.naissance = naissance;
           
@@ -193,11 +194,12 @@ public class Sportif {
         }
       
       
-     } else {
-       verifdate = false;
-     }
-     return verifdate;
-   }
+      } else {
+        verifdate = false;
+      }
+    }
+    return verifdate;
+  }
 
   public Sport getSport() {
     return sport;
@@ -282,9 +284,9 @@ public class Sportif {
       char chrNom = newString.charAt(i); //recup le cara
       if (Character.isLetter(chrNom) == true) { //test caractere
         result = true;
-      }else if(Character.isSpaceChar(chrNom) == true) {
+      } else if (Character.isSpaceChar(chrNom) == true) {
         result = true;
-      }else {
+      } else {
         result = false;
       }
     }
@@ -292,12 +294,17 @@ public class Sportif {
     return result;
   }
   
+  /**
+   * Fonction permettent de verifier si il existe un espace dans le pseudo.
+   * @param newString le nouveau pseudo à verifier
+   * @return false si il existe un espace dans le pseudo, true sinon
+   */
   public boolean verifierStringPseudo(String newString) {
     boolean result = true;
     
     for (int i = 0; i < newString.length();i++) {
       char chrNom = newString.charAt(i); //recup le cara
-      if(Character.isSpaceChar(chrNom) == true) {
+      if (Character.isSpaceChar(chrNom) == true) {
         result = false;
       }
     }

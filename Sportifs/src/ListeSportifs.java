@@ -53,7 +53,7 @@ public class ListeSportifs {
     if (result == 0) {
       
       sportif = Sportif.creerSportif(nom,prenom,pseudo,date,sport);
-      if (sportif!=null) {
+      if (sportif != null) {
         listeDeSportifs.add(sportif);
       } else {
         result = 3;
