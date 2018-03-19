@@ -169,18 +169,22 @@ public class JdbcListeSport {
     return variable;
   }
   
-  public int modifierSport(int id, String newNom ) {
-    int resultat = 0;
-    
+  public boolean modifierSport(int id, String newNom ) {
+    boolean modifierSport = false;
+    int resultat;
     try {
       Statement stmt = LaConnection.getInstance().createStatement();
       resultat = stmt.executeUpdate("UPDATE `t_sports_spt` SET `spt_nom`=" + newNom + " WHERE `spt_id`=" + id + ";");
           
+      if (resultat == 1) {
+        modifierSport = true;
+        this.lspts.modifierSport(id, newNom);
+      }
     } catch (SQLException e) {
       e.printStackTrace();
     }
     
-    return resultat;
+    return modifierSport;
   }
 
 }

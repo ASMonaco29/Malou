@@ -63,7 +63,7 @@ public class ListeSports {
     return null;
   }
   
-public Sport retourneSport(int id) {
+  public Sport retourneSport(int id) {
     
     for(Sport sp : listeDeSports) {
       if(sp.getId() == id ) {
@@ -73,4 +73,13 @@ public Sport retourneSport(int id) {
     
     return null;
   }
+
+  public void modifierSport(int id, String nom) {
+    for(Sport sp : listeDeSports) {
+      if(sp.getId() == id ) {
+        sp.setNom(nom);
+      }
+    }
+  }
+  
 }
