@@ -44,7 +44,7 @@ public class ListeSports {
     boolean trouve = false;
     
     for(Sport sp : listeDeSports) {
-      if(s.getNom().equals(sp.getNom()) ) {
+      if(s.getId() == sp.getId()) {
         trouve = true;
       }
     }
@@ -55,7 +55,18 @@ public class ListeSports {
   public Sport retourneSport(String nom) {
     
     for(Sport sp : listeDeSports) {
-      if(nom.equals(sp.getNom()) ) {
+      if(sp.getNom().equals(nom) ) {
+        return sp;
+      }
+    }
+    
+    return null;
+  }
+  
+public Sport retourneSport(int id) {
+    
+    for(Sport sp : listeDeSports) {
+      if(sp.getId() == id ) {
         return sp;
       }
     }

@@ -113,6 +113,10 @@ public class JdbcListeSportif {
       return -1;
     }
     
+    public int ajouterSportifJdbc( Sportif s ) {
+      return this.ajouterSportifJdbc(s.getPseudo(), s.getNom(), s.getPrenom(), s.getNaissance(), s.getSport().getNom());
+    }
+    
     public Sportif retourneSportifJdbc(String pseudo) {
       return this.lsptfs.retourneSportif(pseudo);
     }
