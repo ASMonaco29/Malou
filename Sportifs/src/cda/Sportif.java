@@ -1,3 +1,4 @@
+package cda;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,9 +13,7 @@ public class Sportif {
   private Sport sport;
   private ArrayList<Questionnaire> listQ;
 
-  /**
-   * Constructeur de la classe Sportif. Génerer automatiquement.
-   */
+  
   public Sportif() {
     super();
     this.nom = null;
@@ -22,41 +21,6 @@ public class Sportif {
     this.pseudo = null;
     this.naissance = null;
     this.listQ = new ArrayList<Questionnaire>();
-  }
-
-  /**
-   * Constructeur de la classe Sportif. Elle fait appel aux fonctions seteurs de la classe.
-   * 
-   * @param nom nom du sportif
-   * @param prenom prénom du sportif
-   * @param pseudo pseudo du sportif
-   * @param date date de naissance du sportif
-   * @param sport le sport du sportif
-   */
-  public static Sportif creerSportif(String nom, String prenom, String pseudo, 
-      Date date, Sport sport) {
-    Sportif sp = new Sportif();
-    
-    if (!sp.setNom(nom)) {
-      return null;
-    }
-    
-    if (!sp.setPrenom(prenom)) {
-      return null;
-    }
-    
-    if (!sp.setPseudo(pseudo)) {
-      return null;
-    }
-    
-    if (!sp.setNaissance(date)) {
-      return null;
-    }
-    
-    sp.setSport(sport);
-    sp.ajouterListQ(new ArrayList<Questionnaire>());
-    
-    return sp;
   }
 
   public String getNom() {
@@ -109,19 +73,13 @@ public class Sportif {
     return pseudo;
   }
   
-  /**
-   * Fonction permettent de modifier le pseudo du Sportif. Avant on
-   * vérifie que le pseudo ne comptient pas d'espace.
-   * @param pseudo le nouveau pseudo du sportif 
-   * @return  la fonction retourne false si le pseudo contient un espace, true sinon
-   */
   public boolean setPseudo(String pseudo) {
     boolean result = false;
     
     if (verifierStringPseudo(pseudo)) {
       this.pseudo = pseudo;
       result = true;
-    } else {
+    }else {
       result = false;
     }
     return result;
@@ -284,9 +242,9 @@ public class Sportif {
       char chrNom = newString.charAt(i); //recup le cara
       if (Character.isLetter(chrNom) == true) { //test caractere
         result = true;
-      } else if (Character.isSpaceChar(chrNom) == true) {
+      }else if(Character.isSpaceChar(chrNom) == true) {
         result = true;
-      } else {
+      }else {
         result = false;
       }
     }
@@ -294,17 +252,12 @@ public class Sportif {
     return result;
   }
   
-  /**
-   * Fonction permettent de verifier si il existe un espace dans le pseudo.
-   * @param newString le nouveau pseudo à verifier
-   * @return false si il existe un espace dans le pseudo, true sinon
-   */
   public boolean verifierStringPseudo(String newString) {
     boolean result = true;
     
     for (int i = 0; i < newString.length();i++) {
       char chrNom = newString.charAt(i); //recup le cara
-      if (Character.isSpaceChar(chrNom) == true) {
+      if(Character.isSpaceChar(chrNom) == true) {
         result = false;
       }
     }
@@ -312,7 +265,7 @@ public class Sportif {
     return result;
   }
 
-  public ArrayList<Questionnaire> getListQ() {
+  public ArrayList<Questionnaire> getquListe() {
     return listQ;
   }
 

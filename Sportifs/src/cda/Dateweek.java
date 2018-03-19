@@ -1,3 +1,4 @@
+package cda;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,13 +32,13 @@ public class Dateweek {
     int annee;
     //On récupère l'année du premier jour de cette semaine
     if (week >= 52) {
-        cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        annee = cal.get(Calendar.YEAR);
+      cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+      annee = cal.get(Calendar.YEAR);
     } else if (week == 1) {
-        cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        annee = cal.get(Calendar.YEAR);
+      cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+      annee = cal.get(Calendar.YEAR);
     } else {
-        annee = cal.get(Calendar.YEAR);
+      annee = cal.get(Calendar.YEAR);
     }
     DecimalFormat df = new DecimalFormat("00");
     this.annee = annee;

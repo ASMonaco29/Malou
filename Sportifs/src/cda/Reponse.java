@@ -1,4 +1,5 @@
-import java.sql.Date;
+package cda;
+import java.util.Date;
 import java.util.ArrayList;
 
 public class Reponse {
@@ -46,39 +47,4 @@ public class Reponse {
   public void setQuestionnaire(Questionnaire questionnaire) {
     this.questionnaire = questionnaire;
   }
-  
-  
-  
-  
-  /*
-   //private int identifiant;
-  
-  public Reponse(Date date, Boolean bln) {
-    this.date = date;
-    this.reponses = bln;
-  }
-
-  public Date getDate() {
-    return date;
-  }
-
-  public void setDate(Date date) {
-    this.date = date;
-  }
-
-  public Boolean getReponses() {
-    return reponses;
-  }
-
-  public void setReponses(Boolean reponses) {
-    this.reponses = reponses;
-  }
-  
-  public void affichage() {
-    int i=1;
-    for(boolean bool : reponses) {
-      System.out.println("Reponse "+i+" = "+reponses.get(i));
-    }
-  }
-  */
 }
