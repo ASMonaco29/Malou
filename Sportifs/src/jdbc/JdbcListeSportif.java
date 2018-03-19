@@ -152,4 +152,30 @@ public class JdbcListeSportif {
       Sportif a = this.retourneSportifJdbc(pseudo);
       return supprimerSportifJdbc(a);
     }
+    
+    public boolean modifierSportifJdbc(Sportif sp) {
+      boolean modifiersportif = false;
+      
+      if ( this.lsptfs.retourneSportif(sp.getPseudo()) != null ) {
+        try {
+          int resultat;
+          Statement stmt = LaConnection.getInstance().createStatement();
+          resultat = stmt.executeUpdate("UPDATE `t_sportif_spo` "
+              + "SET `spo_nom`=" + sp.getNom() + ","
+              + "`spo_prenom`=" + sp.getPrenom() + ","
+              + "`spo_dateN`=" + sp.getNaissance() + ","
+              + "`spt_id`=" + sp.getSport()
+              + "WHERE `spo_pseudo` = " + sp.getPseudo() + ";");
+          
+          if (resultat == 1) {
+            modifiersportif = true;
+            this.lsptfs.modifierSportif(sp);
+          }
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+      
+      return modifiersportif;
+    }
 }
