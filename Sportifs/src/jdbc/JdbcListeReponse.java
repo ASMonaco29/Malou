@@ -42,7 +42,8 @@ public class JdbcListeReponse {
         
       while (resultat.next()) {
           Sportif s = this.lspts.retourneSportifJdbc((String)resultat.getObject("spo_pseudo"));
-          Questionnaire q = this.lqtnrs.retourneQuestionnaireJdbc((String)resultat.getObject("que_titre"));
+          Questionnaire q = this.lqtnrs.recupererQuestionnaireJdbc(
+              (String)resultat.getObject("que_titre"),(String)resultat.getObject("que_sstitre"));
           Date date = resultat.getDate("rep_daterep");
           int i = resultat.getInt("rep_id");
           
@@ -99,7 +100,6 @@ public class JdbcListeReponse {
           ajouterreponse = true;
           int identifiant = this.retourneReponseJdbc(s,q,date).getId();
           //TODO Recuperer les id des reponsepossible et créer des t_rpc
-          
         }
       } catch (SQLException e) {
         e.printStackTrace();
@@ -119,4 +119,11 @@ public class JdbcListeReponse {
   public void supprimerReponseJdbc() {
     
   }
+
+  @Override
+  public String toString() {
+    return "lrps=" + lrps + ", lspts=" + lspts + ", lqtnrs=" + lqtnrs + "";
+  }
+  
+  
 }

@@ -1,15 +1,34 @@
 package cda;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 
 public class Questionnaire {
+  private int id = 0;
   private String titre;
   private String sstitre;
   private Date dateD;
   private Date dateF;
   private String messageFin;
   private ArrayList<Question> quListe;
+
+  
+  public Questionnaire() {
+    super();
+  }
+
+  public Questionnaire(int id, String titre, String sstitre, Date dateD, Date dateF, String messageFin,
+      ArrayList<Question> quListe) {
+    super();
+    this.id = id;
+    this.titre = titre;
+    this.sstitre = sstitre;
+    this.dateD = dateD;
+    this.dateF = dateF;
+    this.messageFin = messageFin;
+    this.quListe = quListe;
+  }
 
   /**public Questionnaire(String titre, String sstitre, Date dateD, Date dateF, String messageFin).
    * 
@@ -19,7 +38,8 @@ public class Questionnaire {
    * @param dateF : date de fin du questionnaire
    * @param messageFin : message de fin du questionnaire
    */
-  public Questionnaire(String titre, String sstitre, Date dateD, Date dateF, String messageFin, ArrayList<Question> lq) {
+  public Questionnaire(String titre, String sstitre, Date dateD, Date dateF,
+      String messageFin, ArrayList<Question> lq) {
     super();
     this.titre = titre;
     this.sstitre = sstitre;
@@ -27,6 +47,14 @@ public class Questionnaire {
     this.dateF = dateF;
     this.messageFin = messageFin;
     this.quListe = lq;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getTitre() {
@@ -131,7 +159,7 @@ public class Questionnaire {
    * @param index : indice de la question à modifier
    * @param rd : nouvelle réponse par défaut
    */
-  public int modifQuestionRd(int index, boolean rd) {
+  public int modifQuestionRd(int index, String rd) {
     if (index < 0 || index >= this.quListe.size()) {
       return -1;
     }
@@ -181,6 +209,9 @@ public class Questionnaire {
 
   @Override
   public String toString() {
-    return this.titre;
+    return "Questionnaire [id=" + id + ", titre=" + titre + ", sstitre=" + sstitre + ", dateD=" + dateD + ", dateF="
+        + dateF + ", messageFin=" + messageFin + ", quListe=" + quListe + "]";
   }
+
+  
 }

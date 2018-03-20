@@ -178,4 +178,9 @@ public class JdbcListeSportif {
       
       return modifiersportif;
     }
+
+    @Override
+    public String toString() {
+      return " lsptfs=" + lsptfs + ", lspt=" + lspt + "";
+    }
 }

@@ -50,5 +50,10 @@ public class ListeReponses {
     
     return r;
   }
+
+  @Override
+  public String toString() {
+    return "reponses=" + reponses + "";
+  }
   
 }

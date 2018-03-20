@@ -57,4 +57,11 @@ public class Reponse {
   public void setQuestionnaire(Questionnaire questionnaire) {
     this.questionnaire = questionnaire;
   }
+
+  @Override
+  public String toString() {
+    return "Reponse [date=" + date + ", reponses=" + reponses + ", sportif=" + sportif + ", questionnaire="
+        + questionnaire + ", id=" + id + "]";
+  }
+  
 }
